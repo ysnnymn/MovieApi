@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requirements", "Requirement
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieApi.Domain", "MovieApi.Domain\MovieApi.Domain.csproj", "{3A60C701-AAD1-421E-A611-C51DFCCE86D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieAği.WebApi", "MovieAği.WebApi\MovieAği.WebApi.csproj", "{A8D7E78C-974F-4FB4-A04D-7A09A66B1F8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieApi.WebApi", "MovieApi.WebApi\MovieApi.WebApi.csproj", "{A8D7E78C-974F-4FB4-A04D-7A09A66B1F8B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieApi.Persistence", "MovieApi.Persistence\MovieApi.Persistence.csproj", "{B7B85E93-AF36-4026-BD28-D0EDDC1D153D}"
 EndProject
