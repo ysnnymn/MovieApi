@@ -1,0 +1,14 @@
+namespace MovieApi.Domain.Features.CQRSDesignPattern.Commands.MovieCommands;
+
+public class CreateMovieCommand
+{
+   
+    public string Title { get; set; }
+    public string CoverImageUrl { get; set; }
+    public Decimal Raitng { get; set; }
+    public string Description { get; set; }
+    public int Duration { get; set; }
+    public DateTime  RealeseDate { get; set; }
+    public string      CreatedYear { get; set; }
+    public bool Status { get; set; }
+}
