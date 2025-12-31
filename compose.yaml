@@ -1,0 +1,6 @@
+﻿services:
+  movieapi.webapi:
+    image: movieapi.webapi
+    build:
+      context: .
+      dockerfile: Presentation/MovieApi.WebApi/Dockerfile
