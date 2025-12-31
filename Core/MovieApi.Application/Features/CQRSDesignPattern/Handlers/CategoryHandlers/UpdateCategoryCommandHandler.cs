@@ -1,0 +1,21 @@
+using MovieApi.Domain.Features.CQRSDesignPattern.Commands.CategoryCommands;
+using MovieApi.Persistance.Context;
+
+namespace MovieApi.Application.Features.Handlers;
+
+public class UpdateCategoryCommandHandler
+{
+    private readonly MovieContext _context;
+
+    public UpdateCategoryCommandHandler(MovieContext context)
+    {
+        _context = context;
+    }
+
+    public async void Handle(UpdateCategoryCommand command)
+    {
+        var value=await _context.Categories.FindAsync(command.CategoryId);
+        value.CategoryName = command.CategoryName;
+        await _context.SaveChangesAsync();
+    }
+}

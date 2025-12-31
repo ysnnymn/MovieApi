@@ -1,6 +1,6 @@
 namespace MovieApi.Domain.Features.CQRSDesignPattern.Commands.CategoryCommands;
 
-public class RemnoveCategoryCommand
+public class RemoveCategoryCommand
 {
     public int CategoryId { get; set; }
     

@@ -1,0 +1,21 @@
+using MovieApi.Domain.Features.CQRSDesignPattern.Commands.CategoryCommands;
+using MovieApi.Persistance.Context;
+
+namespace MovieApi.Application.Features.Handlers;
+
+public class RemoveCategoryCommandHandler
+{
+    private readonly MovieContext _context;
+
+    public RemoveCategoryCommandHandler(MovieContext context)
+    {
+        _context = context;
+    }
+
+    public async void Handle(RemoveCategoryCommand command)
+    {
+        var value=await _context.Categories.FindAsync(command.CategoryId);
+        _context.Categories.Remove(value);
+        await _context.SaveChangesAsync();
+    }
+}

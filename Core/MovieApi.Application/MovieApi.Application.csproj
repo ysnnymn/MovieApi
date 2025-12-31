@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Infrastructre\MovieApi.Persistance\MovieApi.Persistance.csproj" />
+      <ProjectReference Include="..\MovieApi.Domain\MovieApi.Domain.csproj" />
+    </ItemGroup>
+
 </Project>
