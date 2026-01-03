@@ -1,3 +1,4 @@
+using MovieApi.Application.Features.CQRSDesignPattern.Handlers.CastHandlers;
 using MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers;
 using MovieApi.Application.Features.Handlers;
 using MovieApi.Persistance.Context;
@@ -24,6 +25,12 @@ public class Program
         builder.Services.AddScoped<CreateMovieCommandHandler>();
         builder.Services.AddScoped<UpdateMovieCommandHandler>();
         builder.Services.AddScoped<RemoveMovieCommandHandler>();
+
+        builder.Services.AddScoped<GetCastQueryHandler>();
+        builder.Services.AddScoped<GetCastByIdQueryHandler>();
+        builder.Services.AddScoped<CreateCastCommandHandler>();
+        builder.Services.AddScoped<UpdateCastCommandHandler>();
+        builder.Services.AddScoped<RemoveCastCommandHandler>();
 
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
