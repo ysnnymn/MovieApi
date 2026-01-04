@@ -1,0 +1,143 @@
+@model dynamic
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CineReview - Cinematic Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a37538",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#12110f", // Darker for deep cinematic feel
+                        "accent-red": "#e50914", // Cinematic red hint
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>.glass-card {
+    background: rgba(30, 26, 20, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(163, 117, 56, 0.2)
+    }
+.film-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDlMTfYhlqDnNYH-8nnDJqUxBlLZp21LRae9gS_jG0Uk6kAw-w6heSwcKvG2DgNe_TemG9t5kkATkTk_QxBLffJfAUYLA2Ul38PF6O5ZqLiH5DQ2-S_pUctl4dOrQ4NzdGVinJwACk0G9QMESMOeyRaS28Ssm4HlBIZZPr6Vr_8n2G9F0lJuxcpUi6spzZND2TWtrPimLil7k9FtcVa5AMtJh4UOc7d7RnWKpBwguijZnW4w4i7nPzmXLISO6QyPFXL_M4iIN_wgBiS);
+    opacity: 0.05;
+    pointer-events: none
+    }
+.glow-primary {
+    box-shadow: 0 0 20px rgba(163, 117, 56, 0.3)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased overflow-x-hidden min-h-screen flex flex-col">
+<!-- Background Texture/Visual -->
+<div class="fixed inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-b from-[#1e1a14]/60 via-[#12110f] to-[#12110f]"></div>
+<img class="w-full h-full object-cover mix-blend-overlay opacity-30 blur-[4px]" data-alt="Blurred atmospheric cinema background with movie posters" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2ZAUOp8Q-uCr_TLAb6FktNv91oNNge-dmq-2SPK52BH0ni7jfmiG6hEVx0Cj6doSBjKXZGWRi28di3ZstRIr3xHb-s05CykiuduSqDWFuSBJ5Pk-WDbJ3EYHnZ0LJbChiraHtcVzkor0Dnia7mJNvmc3WKZ5bJ7TM4yBCy4Cx_PmZD4SWQrm1cR-KQZuwVnjdFDEmC2tbGFGis_aT0kNMv3jFeCYDon-G3FxnBCy_09d-94O6jEgegP1OTZACu00SSAzIqwl-Q4xr"/>
+<div class="absolute inset-0 film-grain"></div>
+</div>
+<!-- Main Content Container (Phone Layout) -->
+<main class="relative z-10 flex flex-col items-center justify-center min-h-screen p-6 w-full max-w-[430px] mx-auto">
+<!-- Top App Bar Area -->
+<div class="w-full mb-8 flex flex-col items-center">
+<div class="bg-primary/20 p-4 rounded-full mb-4 ring-1 ring-primary/40">
+<span class="material-symbols-outlined text-primary text-4xl leading-none">movie_filter</span>
+</div>
+<h2 class="text-white text-sm font-bold tracking-[0.4em] uppercase opacity-80">CineReview</h2>
+</div>
+<!-- Login Card -->
+<div class="glass-card w-full rounded-xl p-8 shadow-2xl">
+<div class="text-center mb-8">
+<h1 class="text-white text-3xl font-extrabold tracking-tight mb-2">Welcome Back</h1>
+<p class="text-white/60 text-sm">Sign in to continue your cinematic journey.</p>
+</div>
+<form class="space-y-6">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block text-white/80 text-xs font-semibold tracking-wider uppercase ml-1">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/40 text-lg">alternate_email</span>
+<input class="w-full bg-[#24221e]/50 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder:text-white/20 focus:border-primary/60 focus:ring-0 focus:outline-none transition-all duration-300" placeholder="your@email.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center ml-1">
+<label class="block text-white/80 text-xs font-semibold tracking-wider uppercase">Password</label>
+<a class="text-primary text-[10px] font-bold uppercase hover:text-primary/80" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/40 text-lg">lock</span>
+<input class="w-full bg-[#24221e]/50 border border-white/10 rounded-xl py-4 pl-12 pr-12 text-white placeholder:text-white/20 focus:border-primary/60 focus:ring-0 focus:outline-none transition-all duration-300" placeholder="••••••••" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-white/40 text-lg cursor-pointer">visibility</span>
+</div>
+</div>
+<!-- Sign In Button -->
+<button class="w-full bg-primary hover:bg-[#b58342] text-white font-bold py-4 rounded-xl transition-all glow-primary transform active:scale-[0.98] mt-4 flex items-center justify-center gap-2" type="submit">
+<span>Sign In</span>
+<span class="material-symbols-outlined text-xl">arrow_right_alt</span>
+</button>
+</form>
+<!-- Social Logins -->
+<div class="mt-10">
+<div class="flex items-center gap-4 mb-6">
+<div class="h-[1px] flex-1 bg-white/10"></div>
+<span class="text-white/30 text-[10px] uppercase tracking-widest font-bold">Or enter with</span>
+<div class="h-[1px] flex-1 bg-white/10"></div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 flex items-center justify-center gap-2 bg-white/5 border border-white/10 hover:bg-white/10 py-3 rounded-xl transition-all">
+<img class="w-5 h-5" data-alt="Google logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVvlcWelXlUcvQHULQNRH3kr7RuX6CiQQblp_89O7ZfxrGQzUmzYz5ZnQl9ekOEtGa6OeL9yxV1H3JwlY7FfBY-wspkBpArZynSZ7Gl9z39jofYFarM87mcu8rah6MqcyzhgrSpo4TUkSHf-_pSrcj4VLEKVM0ZmiUSV5O0jXpNeHECf80p37pSAHgZYFmlw9pFjsXnndYQwki4WJfRGW3zr4KUfcnhvZoTJZEKxqEG5O62bHbZK55X2_WmFxPQJnys0tozxAYKBq0"/>
+<span class="text-white text-xs font-semibold">Google</span>
+</button>
+<button class="flex-1 flex items-center justify-center gap-2 bg-white/5 border border-white/10 hover:bg-white/10 py-3 rounded-xl transition-all">
+<span class="material-symbols-outlined text-white text-xl">ios</span>
+<span class="text-white text-xs font-semibold">Apple</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="mt-10 text-center">
+<p class="text-white/50 text-sm">
+                Don't have an account? 
+                <a class="text-primary font-bold hover:underline underline-offset-4 ml-1" href="#">Join the Club</a>
+</p>
+</div>
+<!-- Legal/Safety -->
+<div class="mt-auto pb-8 pt-10 flex gap-6 opacity-30">
+<a class="text-white text-[10px] uppercase font-bold tracking-widest" href="#">Privacy</a>
+<a class="text-white text-[10px] uppercase font-bold tracking-widest" href="#">Terms</a>
+<a class="text-white text-[10px] uppercase font-bold tracking-widest" href="#">Support</a>
+</div>
+</main>
+</body></html>

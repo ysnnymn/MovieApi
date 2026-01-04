@@ -1,55 +1,33 @@
-using System.Reflection;
-using MovieApi.Application.Features.CQRSDesignPattern.Handlers.CastHandlers;
-using MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers;
-using MovieApi.Application.Features.Handlers;
-using MovieApi.Application.Features.MediatorDesignPattern.Handlers.TagHandlers;
+using Microsoft.AspNetCore.Identity;
 using MovieApi.Persistance.Context;
+using MovieApi.Persistance.Identity;
+using MovieApi.WebApi.Extensions;
 
-namespace MovieApi.WebApi;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program
-{
-    public static void Main(string[] args)
-    {
-        var builder = WebApplication.CreateBuilder(args);
+// DbContext
+builder.Services.AddDbContext<MovieContext>();
 
-        builder.Services.AddDbContext<MovieContext>();
+// Identity
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<MovieContext>();
 
-        // CQRS Handlers
-        builder.Services.AddScoped<GetCategoryQueryHandler>();
-        builder.Services.AddScoped<GetCategoryByIdQueryHandler>();
-        builder.Services.AddScoped<CreateCategoryCommandHandler>();
-        builder.Services.AddScoped<UpdateCategoryCommandHandler>();
-        builder.Services.AddScoped<RemoveCategoryCommandHandler>();
+// Application Services (CQRS, MediatR, AutoMapper)
+builder.Services.AddApplicationServices();
 
-        builder.Services.AddScoped<GetMovieQueryHandler>();
-        builder.Services.AddScoped<GetMovieByIdQueryHandler>();
-        builder.Services.AddScoped<CreateMovieCommandHandler>();
-        builder.Services.AddScoped<UpdateMovieCommandHandler>();
-        builder.Services.AddScoped<RemoveMovieCommandHandler>();
+// Controllers & Swagger
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-        builder.Services.AddScoped<GetCastQueryHandler>();
-        builder.Services.AddScoped<GetCastByIdQueryHandler>();
-        builder.Services.AddScoped<CreateCastCommandHandler>();
-        builder.Services.AddScoped<UpdateCastCommandHandler>();
-        builder.Services.AddScoped<RemoveCastCommandHandler>();
+var app = builder.Build();
 
-        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetTagQueryHandler).Assembly));
-        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateCastCommandHandler).Assembly));
+// Middleware
+app.UseSwagger();
+app.UseSwaggerUI();
 
-        builder.Services.AddControllers();
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen(); // 🔥 PARAMETRESİZ
+app.UseHttpsRedirection();
+app.UseAuthorization();
 
-        var app = builder.Build();
-
-        app.UseSwagger();     // 🔥 HER ZAMAN
-        app.UseSwaggerUI();   // 🔥 HER ZAMAN
-
-        app.UseHttpsRedirection();
-        app.UseAuthorization();
-        app.MapControllers();
-
-        app.Run();
-    }
-}
+app.MapControllers();
+app.Run();

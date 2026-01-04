@@ -15,14 +15,16 @@ namespace MovieApi.WebApi.Controllers
         private readonly UpdateMovieCommandHandler _updateMovieCommandHandler;
         private readonly RemoveMovieCommandHandler _removeMovieCommandHandler;
         private readonly GetMovieByIdQueryHandler _getMovieByIdQueryHandler;
+        private readonly GetMovieWithCategoryQueryHandler _getMovieWithCategoryQueryHandler;
 
-        public MoviesController(GetMovieQueryHandler getMovieQueryHandler, CreateMovieCommandHandler createMovieCommandHandler, UpdateMovieCommandHandler updateMovieCommandHandler, RemoveMovieCommandHandler removeMovieCommandHandler, GetMovieByIdQueryHandler getMovieByIdQueryHandler)
+        public MoviesController(GetMovieQueryHandler getMovieQueryHandler, CreateMovieCommandHandler createMovieCommandHandler, UpdateMovieCommandHandler updateMovieCommandHandler, RemoveMovieCommandHandler removeMovieCommandHandler, GetMovieByIdQueryHandler getMovieByIdQueryHandler, GetMovieWithCategoryQueryHandler getMovieWithCategoryQueryHandler)
         {
             _getMovieQueryHandler = getMovieQueryHandler;
             _createMovieCommandHandler = createMovieCommandHandler;
             _updateMovieCommandHandler = updateMovieCommandHandler;
             _removeMovieCommandHandler = removeMovieCommandHandler;
             _getMovieByIdQueryHandler = getMovieByIdQueryHandler;
+            _getMovieWithCategoryQueryHandler = getMovieWithCategoryQueryHandler;
         }
         [HttpGet]
         public async Task<IActionResult> MovieList()
@@ -38,14 +40,16 @@ namespace MovieApi.WebApi.Controllers
             return Ok(value);
         }
 
+     
         [HttpPost]
-        public async Task<IActionResult> CreateMovie(CreateMovieCommand command)
+        public async Task<IActionResult> CreateMovies(CreateMovieCommand commands)
         {
-            await _createMovieCommandHandler.Handle(command);
-            return Ok("Movie created");
+           
+                await _createMovieCommandHandler.Handle(commands);
             
-            
+            return Ok("Movies created");
         }
+
 
         [HttpPut]
         public async Task<IActionResult> UpdateMovie(UpdateMovieCommand command)
@@ -59,6 +63,13 @@ namespace MovieApi.WebApi.Controllers
         {
             await _removeMovieCommandHandler.Handle(new RemoveMovieCommand(id));
             return Ok("Movie removed");
+        }
+
+        [HttpGet("GetMovieWithCategory")]
+        public async Task<IActionResult> GetMovieWithCategory()
+        {
+            var value=await _getMovieWithCategoryQueryHandler.Handle();
+            return Ok(value);
         }
     }
     

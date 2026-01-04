@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+
 using MovieApi.Domain.Entities;
+using MovieApi.Persistance.Identity;
 
 namespace MovieApi.Persistance.Context;
 
-public class MovieContext:DbContext
+public class MovieContext:IdentityDbContext<AppUser>
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -15,4 +18,5 @@ public class MovieContext:DbContext
     public DbSet<Review> Reviews { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<Cast> Casts { get; set; }
+    public DbSet<Series> Series { get; set; }
 }
