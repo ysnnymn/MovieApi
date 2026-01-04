@@ -1,6 +1,8 @@
+using System.Reflection;
 using MovieApi.Application.Features.CQRSDesignPattern.Handlers.CastHandlers;
 using MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers;
 using MovieApi.Application.Features.Handlers;
+using MovieApi.Application.Features.MediatorDesignPattern.Handlers.TagHandlers;
 using MovieApi.Persistance.Context;
 
 namespace MovieApi.WebApi;
@@ -31,6 +33,9 @@ public class Program
         builder.Services.AddScoped<CreateCastCommandHandler>();
         builder.Services.AddScoped<UpdateCastCommandHandler>();
         builder.Services.AddScoped<RemoveCastCommandHandler>();
+
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetTagQueryHandler).Assembly));
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateCastCommandHandler).Assembly));
 
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
